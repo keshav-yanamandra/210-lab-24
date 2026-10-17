@@ -85,17 +85,26 @@ int main_menu() {
     return choice;
 }
 
+//add_goat had a problem - when I added a lot of goats and when the same goat was added, the message was saying goat added but it was not. 
+//so I am fixing by checking if the size of trip increased or not before printing that goat is added
 void add_goat(set<Goat> &trip, string names[], string colors[]) {
     string name = names[rand() % SZ_NAMES];
     string color = colors[rand() % SZ_COLORS];
     int age = rand() % (MAX_AGE + 1);
+    int oldSize = trip.size();
 
     Goat newGoat(name, age, color);
     //trip.push_back(newGoat);
     trip.insert(newGoat);
 
     cout << endl;
-    cout << "Added: " << name << " (" << age << ", " << color << ")" << endl;
+    if (trip.size() > oldSize) {
+        cout << "Added: " << name << " (" << age << ", " << color << ")" << endl;
+    }
+    else {
+        cout << "There's already a goat named " << name << " - not added." << endl;
+    }
+
     cout << endl;
 }
 
