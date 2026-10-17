@@ -1,16 +1,23 @@
+// Keshav Yanamandra
+// COMSC-210-5293, Fall 2026
+// Lab 24
+// started from my Lab 23 code
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <set>
+
 #include "Goat.h"
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
-int select_goat(list<Goat> trip);
-void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
+int select_goat(set<Goat> trip);
+void delete_goat(set<Goat> &trip);
+void add_goat(set<Goat> &trip, string [], string []);
+void display_trip(set<Goat> trip);
 int main_menu();
 
 int main() {
@@ -32,7 +39,7 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    list<Goat> trip;
+    set<Goat> trip;
 
     again = true;
 
@@ -78,20 +85,21 @@ int main_menu() {
     return choice;
 }
 
-void add_goat(list<Goat> &trip, string names[], string colors[]) {
+void add_goat(set<Goat> &trip, string names[], string colors[]) {
     string name = names[rand() % SZ_NAMES];
     string color = colors[rand() % SZ_COLORS];
     int age = rand() % (MAX_AGE + 1);
 
     Goat newGoat(name, age, color);
-    trip.push_back(newGoat);
+    //trip.push_back(newGoat);
+    trip.insert(newGoat);
 
     cout << endl;
     cout << "Added: " << name << " (" << age << ", " << color << ")" << endl;
     cout << endl;
 }
 
-void display_trip(list<Goat> trip) {
+void display_trip(set<Goat> trip) {
     if (trip.empty()) {
         cout << endl;
         cout << "There are no goats in the trip." << endl;
@@ -112,7 +120,7 @@ void display_trip(list<Goat> trip) {
     cout << endl;
 }
 
-int select_goat(list<Goat> trip) {
+int select_goat(set<Goat> trip) {
     int number = 1;
     int choice;
 
@@ -138,7 +146,7 @@ int select_goat(list<Goat> trip) {
     return choice;
 }
 
-void delete_goat(list<Goat> &trip) {
+void delete_goat(set<Goat> &trip) {
     if (trip.empty()) {
         cout << "There are no goats to delete." << endl;
         return;
@@ -151,7 +159,7 @@ void delete_goat(list<Goat> &trip) {
         return;
     }
 
-    list<Goat>::iterator it = trip.begin();
+    set<Goat>::iterator it = trip.begin();
 
     for (int i = 1; i < choice; i++) {
         it++;

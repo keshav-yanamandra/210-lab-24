@@ -1,4 +1,7 @@
-// Goat.h
+// Keshav Yanamandra
+// COMSC-210-5293, Fall 2026
+// Lab 24
+// started from my Lab 23 code
 
 #ifndef GOAT_H
 #define GOAT_H
